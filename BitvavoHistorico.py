@@ -111,7 +111,7 @@ class GetIdAssetObj(QueryBase):
         self.SQL = f"""SELECT {DB_ASSETS.ID_ASSET} FROM {DB_ASSETS.TABLE} WHERE 
                     {DB_ASSETS.NOMBRE} = :{DB_ASSETS.ID_ASSET}"""
 
-class GetDBTimestamp(QueryBase):
+class GetDBTimestampQ(QueryBase):
     def __init__(self):
         self.registro ={}
         self.SQL = f"SELECT {DB_CREATION_DATE.TIMESTAMP} FROM {DB_CREATION_DATE.TABLE}"
@@ -130,8 +130,8 @@ def GetIdAsset(conn,asset):
 
 def GetDBTimestamp(dbName):
     with sqlite3.connect(dbName) as conn:
-        get=GetDBTimestamp(conn)
-        resultados=get.execute(conn)
+        getDB=GetDBTimestampQ()
+        resultados=getDB.execute(conn)
 
         if not resultados:
             print("No hay timestamp")
